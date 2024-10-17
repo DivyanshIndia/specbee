@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conference Speakers</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div class="speakers">
+      <div class="speakers__header">
+        <h1 class="speakers__title">
+          View our Featured Speakers for the Event
+        </h1>
+        <p class="speakers__subtitle">
+          Speakers are core contributors and industry thought leaders working at
+          <a href="#" class="speakers__link">companies</a>
+          that push for innovation.
+        </p>
+      </div>
+
+      <!-- Speaker Detail Popup -->
+      <div class="speaker-detail" id="speakerDetail">
+        <button
+          class="speaker-detail__close"
+          aria-label="Close speaker details"
+        >
+          &times;
+        </button>
+        <div class="speaker-detail__info">
+          <img
+            src="/api/placeholder/100/100"
+            alt=""
+            class="speaker-detail__image"
+          />
+          <div class="speaker-detail__text">
+            <h2 class="speaker-detail__name"></h2>
+            <p class="speaker-detail__role"></p>
+            <p class="speaker-detail__company"></p>
+           
+          </div>
+          <div class="speaker-detail_divider"></div>
+          <p class="speaker-detail__bio"></p>
+        </div>
+      </div>
+
+      <!-- Speakers Slider -->
+      <div class="speakers-slider">
+        <button
+          class="speakers-slider__nav speakers-slider__nav--prev"
+          aria-label="Previous speakers"
+        >
+          &lsaquo;
+        </button>
+
+        <div class="speakers-slider__container">
+          <div class="speakers-slider__track">
+            <!-- Speaker cards will be inserted here by JavaScript -->
+          </div>
+        </div>
+
+        <button
+          class="speakers-slider__nav speakers-slider__nav--next"
+          aria-label="Next speakers"
+        >
+          &rsaquo;
+        </button>
+      </div>
+
+      <div class="speakers__footer">
+        <button class="speakers__cta">See the Program</button>
+      </div>
+    </div>
+
+    <script src="index.js"></script>
+   
+  </body>
+</html>
