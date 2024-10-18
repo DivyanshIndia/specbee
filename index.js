@@ -7,7 +7,12 @@ const speakers = [
         company: 'Acme Corp',
         bio: 'Monotonectally synergize business communities rather than client-centric convergence. Assertively unleash cross-platform best practices rather than pandemic total linkage. Synergistically monetize parallel infomediaries whereas 2.0 mindshare.',
         image: 'https://randomuser.me/api/portraits/men/1.jpg',
-        fallbackImage: 'https://ui-avatars.com/api/?name=John+Doe&background=0D8ABC&color=fff'
+        fallbackImage: 'https://ui-avatars.com/api/?name=John+Doe&background=0D8ABC&color=fff',
+        socials: {
+            drupal: "#",
+            linkedIn: "#",
+            x: "#",
+        }
     },
     {
         id: 2,
@@ -16,7 +21,12 @@ const speakers = [
         company: 'Acquia',
         bio: 'Expert in driving customer engagement and community building strategies with a focus on scalable solutions.',
         image: 'https://randomuser.me/api/portraits/men/2.jpg',
-        fallbackImage: 'https://ui-avatars.com/api/?name=John+Doe&background=0D8ABC&color=fff'
+        fallbackImage: 'https://ui-avatars.com/api/?name=John+Doe&background=0D8ABC&color=fff',
+        socials: {
+            drupal: "#",
+            linkedIn: "#",
+            x: "#",
+        }
     },
     {
         id: 3,
@@ -25,7 +35,12 @@ const speakers = [
         company: 'Pantheon',
         bio: 'Specialized in architecture and implementation of scalable solutions.',
         image: 'https://randomuser.me/api/portraits/men/3.jpg',
-        fallbackImage: 'https://ui-avatars.com/api/?name=John+Doe&background=0D8ABC&color=fff'
+        fallbackImage: 'https://ui-avatars.com/api/?name=John+Doe&background=0D8ABC&color=fff',
+        socials: {
+            drupal: "#",
+            linkedIn: "#",
+            x: "#",
+        }
     },
     {
         id: 4,
@@ -34,7 +49,12 @@ const speakers = [
         company: 'Specbee',
         bio: 'Leading innovative marketing strategies and digital transformations.',
         image: 'https://randomuser.me/api/portraits/men/4.jpg',
-        fallbackImage: 'https://ui-avatars.com/api/?name=John+Doe&background=0D8ABC&color=fff'
+        fallbackImage: 'https://ui-avatars.com/api/?name=John+Doe&background=0D8ABC&color=fff',
+        socials: {
+            drupal: "#",
+            linkedIn: "#",
+            x: "#",
+        }
     },
     {
         id: 5,
@@ -43,7 +63,12 @@ const speakers = [
         company: 'Pantheon',
         bio: 'Specialized in architecture and implementation of scalable solutions.',
         image: 'https://randomuser.me/api/portraits/men/3.jpg',
-        fallbackImage: 'https://ui-avatars.com/api/?name=John+Doe&background=0D8ABC&color=fff'
+        fallbackImage: 'https://ui-avatars.com/api/?name=John+Doe&background=0D8ABC&color=fff',
+        socials: {
+            drupal: "#",
+            linkedIn: "#",
+            x: "#",
+        }
     },
     {
         id: 6,
@@ -52,7 +77,12 @@ const speakers = [
         company: 'Specbee',
         bio: 'Leading innovative marketing strategies and digital transformations.',
         image: 'https://randomuser.me/api/portraits/men/4.jpg',
-        fallbackImage: 'https://ui-avatars.com/api/?name=John+Doe&background=0D8ABC&color=fff'
+        fallbackImage: 'https://ui-avatars.com/api/?name=John+Doe&background=0D8ABC&color=fff',
+        socials: {
+            drupal: "#",
+            linkedIn: "#",
+            x: "#",
+        }
     }
 ];
 
@@ -103,12 +133,25 @@ class SpeakersSlider {
                     <h3 class="speaker-card__name">${speaker.name}</h3>
                     <p class="speaker-card__role">${speaker.role}</p>
                     <p class="speaker-card__company">${speaker.company}</p>
+                   
                 </div>
                 ${this.isMobile ? `
                     <div class="speaker-card__expanded">
                         <p class="speaker-card__bio">${speaker.bio}</p>
                     </div>
                 ` : ''}
+
+                 ${this.isMobile ? `<div class="social-icons">
+                    <a href=${speaker.socials.linkedIn} class="social-icon social-icon_linkedIn" aria-label="LinkedIn">
+                        <img src="/icons/linkedin.svg" alt="LinkedIn" />
+                    </a>
+                    <a href=${speaker.socials.x} class="social-icon social-icon_x" aria-label="X">
+                        <img src="/icons/x.svg" alt="X (Twitter)" />
+                    </a>
+                    <a href=${speaker.socials.drupal} class="social-icon social-icon_drupal" aria-label="Drupal">
+                        <img src="/icons/drupal.svg" alt="Drupal" />
+                    </a>
+            </div>` : ''}
             </div>
         `).join('');
     }
@@ -128,6 +171,11 @@ class SpeakersSlider {
         detail.querySelector('.speaker-detail__role').textContent = speaker.role;
         detail.querySelector('.speaker-detail__company').textContent = speaker.company;
         detail.querySelector('.speaker-detail__bio').textContent = speaker.bio;
+        detail.querySelector('.social-icon_linkedIn').href = speaker.socials.linkedIn
+        detail.querySelector('.social-icon_x').href = speaker.socials.x
+        detail.querySelector('.social-icon_drupal').href = speaker.socials.drupal
+
+
 
         detail.classList.add('is-active');
     }
@@ -239,30 +287,7 @@ class SpeakersSlider {
             }
         });
 
-        // Touch swipe handling for mobile
-        let touchStartX = 0;
-        let touchEndX = 0;
 
-        this.track.addEventListener('touchstart', (e) => {
-            touchStartX = e.touches[0].clientX;
-        }, false);
-
-        this.track.addEventListener('touchmove', (e) => {
-            touchEndX = e.touches[0].clientX;
-        }, false);
-
-        this.track.addEventListener('touchend', () => {
-            if (!this.isMobile) {
-                const swipeDistance = touchEndX - touchStartX;
-                if (Math.abs(swipeDistance) > 50) { // Minimum swipe distance
-                    if (swipeDistance > 0) {
-                        this.slide('prev');
-                    } else {
-                        this.slide('next');
-                    }
-                }
-            }
-        }, false);
     }
 
     slide(direction) {
@@ -282,7 +307,7 @@ class SpeakersSlider {
     updateSliderVisibility() {
         if (this.isMobile) return;
 
-        const slideWidth = 100 / this.slidesPerView;
+        const slideWidth = 95 / this.slidesPerView;
         this.track.style.transform = `translateX(-${this.currentSlide * slideWidth}%)`;
 
         // Update navigation buttons visibility
